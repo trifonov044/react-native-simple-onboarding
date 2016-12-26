@@ -1,47 +1,63 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 
-const PageCheckmark = ({ style }) => (
-    <Text style={{ ...styles.element, ...styles.elementCheck, ...style }}>✓</Text>
+import PageDots from './PageDots';
+import { SymbolButton, TextButton } from './Buttons';
+
+const getDefaultStyle = (isLight) => ({
+    color: isLight ? 'rgba(0, 0, 0, 0.8)' : '#fff',
+});
+
+const SkipButton = ({ isLight, ...props }) => (
+    <TextButton {...props} textStyle={getDefaultStyle(isLight)}>
+        Skip
+    </TextButton>
 );
 
-const PageDot = ({ isLight, selected }) => (
-    <View
-        style={{
-            ...styles.element,
-            ...styles.elementDot,
-            backgroundColor: isLight ? (selected ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.3)') : (selected ? '#fff' : 'rgba(255, 255, 255, 0.5)'),
-        }}
-    />
+const NextButton = ({ isLight, text, textStyle, buttonStyle,...props }) => (
+    <TextButton {...props} textStyle={textStyle} style={buttonStyle}>
+        {text}
+    </TextButton>
+);
+const DoneButton = ({ isLight, size, text, textStyle, buttonStyle, ...props }) => (
+    <TextButton {...props} size={size} textStyle={textStyle} style={buttonStyle}>
+        {text}
+    </TextButton>
 );
 
-const PageDots = ({ isLight, pages, currentPage }) => (
-    <View style={styles.container}>
-        {Array.from(new Array(pages), (x, i) => i).map(page => (
-            <PageDot key={page} selected={page === currentPage} isLight={isLight} />
-        ))}
+const BUTTON_SIZE = 40;
+const Paginator = ({ isLight, overlay, showSkip, showNext, showDone, pages, currentPage, onEnd, onNext, nextButtonText, doneButtonText, buttonStyle, buttonTextStyle}) => (
+    <View style={{ ...styles.container, ...(overlay ? styles.containerOverlay : {}) }}>
+        <PageDots isLight={isLight} pages={pages} currentPage={currentPage} />
+        <View style={styles.buttonRight}>
+            {currentPage + 1 === pages ?
+                (showDone ? <DoneButton isLight={isLight} size={BUTTON_SIZE} onPress={onEnd} text={doneButtonText} textStyle={buttonTextStyle} buttonStyle={buttonStyle}/> : null) :
+                (showNext ? <NextButton isLight={isLight} size={BUTTON_SIZE} onPress={onNext} text={nextButtonText} textStyle={buttonTextStyle} buttonStyle={buttonStyle}/> : null)
+            }
+        </View>
     </View>
 );
 
 const styles = {
     container: {
-        flex: 0,
-        flexDirection: 'row',
+        height: 100,
+        paddingBottom:30,
+        paddingHorizontal: 0,
+        justifyContent: 'space-around',
         alignItems: 'center',
     },
-    element: {
-        marginHorizontal: 3,
+    containerOverlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
     },
-    elementCheck:  {
-        textAlign: 'center',
-        fontSize: 12,
-        fontWeight: '900',
+    buttonLeft: {
+        width: 70,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
-    elementDot: {
-        width: 10,
-        height: 10,
-        borderRadius: 5,
-    },
+    buttonRight: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 };
 
-export default PageDots;
+export default Paginator;
