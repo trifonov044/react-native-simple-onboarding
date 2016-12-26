@@ -97,8 +97,8 @@ Onboarding.propTypes = {
   showDone: PropTypes.bool,
   nextButtonText: PropTypes.string,
   doneButtonText: PropTypes.string,
-  buttonStyle: PropTypes.objectOf(StyleSheet),
-  buttonTextStyle: PropTypes.objectOf(StyleSheet),
+  buttonStyle: PropTypes.object,
+  buttonTextStyle: PropTypes.object,
 };
 
 Onboarding.defaultProps = {
