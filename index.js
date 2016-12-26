@@ -37,45 +37,49 @@ export default class Onboarding extends Component {
 
   render() {
     const { width, height } = Dimensions.get('window');
-    const { pages, bottomOverlay, showSkip, showNext, showDone } = this.props;
+    const { pages, bottomOverlay, showSkip, showNext, showDone, nextButtonText, doneButtonText} = this.props;
     const currentPage = pages[this.state.currentPage] || pages[0];
     const { backgroundColor } = currentPage;
     const isLight = tinycolor(backgroundColor).getBrightness() > 180;
 
     return (
-      <View style={{ flex: 1, backgroundColor: backgroundColor, justifyContent: 'center' }}>
-        <ScrollView
-          ref="scroll"
-          pagingEnabled={true}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          onScroll={this.updatePosition}
-          scrollEventThrottle={100}
-        >
-          {pages.map(({ image, title, subtitle }, idx) => (
-            <PageData
-              key={idx}
+        <View style={{ flex: 1, backgroundColor: backgroundColor, justifyContent: 'center' }}>
+          <ScrollView
+              ref="scroll"
+              pagingEnabled={true}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              onScroll={this.updatePosition}
+              scrollEventThrottle={100}
+          >
+            {pages.map(({ image, title, subtitle }, idx) => (
+                <PageData
+                    key={idx}
+                    isLight={isLight}
+                    image={image}
+                    title={title}
+                    subtitle={subtitle}
+                    width={width}
+                    height={height}
+                />
+            ))}
+          </ScrollView>
+          <Paginator
               isLight={isLight}
-              image={image}
-              title={title}
-              subtitle={subtitle}
-              width={width}
-              height={height}
-            />
-          ))}
-        </ScrollView>
-        <Paginator
-          isLight={isLight}
-          overlay={bottomOverlay}
-          showSkip={showSkip}
-          showNext={showNext}
-          showDone={showDone}
-          pages={pages.length}
-          currentPage={this.state.currentPage}
-          onEnd={this.props.onEnd}
-          onNext={this.goNext}
-        />
-      </View>
+              overlay={bottomOverlay}
+              showSkip={showSkip}
+              showNext={showNext}
+              showDone={showDone}
+              pages={pages.length}
+              currentPage={this.state.currentPage}
+              onEnd={this.props.onEnd}
+              onNext={this.goNext}
+              nextButtonText={nextButtonText}
+              doneButtonText={doneButtonText}
+              buttonStyle = {this.props.buttonStyle}
+              buttonTextStyle = {this.props.buttonTextStyle}
+          />
+        </View>
     );
   }
 }
@@ -91,6 +95,9 @@ Onboarding.propTypes = {
   showSkip: PropTypes.bool,
   showNext: PropTypes.bool,
   showDone: PropTypes.bool,
+  nextButtonText: PropTypes.string,
+  buttonStyle: PropTypes.objectOf(StyleSheet),
+  buttonTextStyle: PropTypes.objectOf(StyleSheet),
 };
 
 Onboarding.defaultProps = {
