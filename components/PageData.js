@@ -36,11 +36,12 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop:60
   },
   image: {
     flex: 0,
-    paddingBottom: 40,
+    paddingBottom: 60,
     alignItems: 'center',
   },
   title: {

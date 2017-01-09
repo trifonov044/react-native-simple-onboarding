@@ -10,8 +10,8 @@ const SymbolButton = ({ isLight, size, onPress, style, textStyle, children }) =>
 );
 
 const TextButton = ({ isLight, size, onPress, textStyle, children, style }) => (
-    <View style={{ flex: 0, ...style }}>
-        <TouchableOpacity style={{ flex: 0 }} onPress={onPress}>
+    <View style={{ flex: 0}}>
+        <TouchableOpacity style={[{ flex: 0 }, style]} onPress={onPress}>
             <Text style={{ fontSize: size / 2.5, ...textStyle }}>{children}</Text>
         </TouchableOpacity>
     </View>

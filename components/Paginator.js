@@ -41,7 +41,7 @@ const Paginator = ({ isLight, overlay, showSkip, showNext, showDone, pages, curr
 const styles = {
     container: {
         height: 100,
-        paddingBottom:30,
+        paddingBottom:20,
         paddingHorizontal: 0,
         justifyContent: 'space-around',
         alignItems: 'center',
