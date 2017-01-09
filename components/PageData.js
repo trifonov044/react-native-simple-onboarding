@@ -40,7 +40,7 @@ const styles = {
   },
   image: {
     flex: 0,
-    paddingBottom: 60,
+    paddingBottom: 40,
     alignItems: 'center',
   },
   title: {
@@ -53,9 +53,10 @@ const styles = {
     color: '#000',
   },
   subtitle: {
+    padding:8,
     textAlign: 'center',
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 1.0)',
   },
   subtitleLight: {
     color: 'rgba(0, 0, 0, 0.7)',
