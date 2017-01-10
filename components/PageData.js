@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
+const HORIZONTAL_ORIENTATION = 'horizontal';
+const VERTICAL_ORIENTATION = 'vertical';
+
 const Page = ({ width, height, children }) => (
   <View style={{ width, height }}>
     {children}
