@@ -57,7 +57,7 @@ export default class Onboarding extends Component {
     const isLight = tinycolor(backgroundColor).getBrightness() > 180;
 
     return (
-        <View style={{ flex: 1, backgroundColor: backgroundColor, justifyContent: 'center' }}>
+        <View style={{ flex: 1, backgroundColor: backgroundColor, justifyContent: 'center' }} onLayout={(event) => this.measureView(event)}>
           <ScrollView
               ref="scroll"
               pagingEnabled={true}
