@@ -5,12 +5,19 @@ import tinycolor from 'tinycolor2';
 import PageData from './components/PageData';
 import Paginator from './components/Paginator';
 
+const HORIZONTAL_ORIENTATION = 'horizontal';
+const VERTICAL_ORIENTATION = 'vertical';
+
 export default class Onboarding extends Component {
   constructor() {
     super();
 
+    const { width, height } = Dimensions.get('window');
     this.state = {
       currentPage: 0,
+      height:height,
+      width:width,
+      orientation: height > width ? VERTICAL_ORIENTATION : HORIZONTAL_ORIENTATION,
     };
   }
 
@@ -27,7 +34,7 @@ export default class Onboarding extends Component {
   };
 
   goNext = () => {
-    const { width } = Dimensions.get('window');
+    const { width } = this.state.width;
     const { currentPage } = this.state;
     const nextPage = currentPage + 1;
     const offsetX = nextPage * width;
@@ -35,8 +42,15 @@ export default class Onboarding extends Component {
     this.setState({ currentPage: nextPage });
   };
 
+  measureView(event) {
+    this.setState({
+      height: event.nativeEvent.layout.height,
+      width: event.nativeEvent.layout.width,
+      orientation: event.nativeEvent.layout.height > event.nativeEvent.layout.width ? VERTICAL_ORIENTATION : HORIZONTAL_ORIENTATION
+    });
+  };
   render() {
-    const { width, height } = Dimensions.get('window');
+    const { width, height } = this.state;
     const { pages, bottomOverlay, showSkip, showNext, showDone, nextButtonText, doneButtonText} = this.props;
     const currentPage = pages[this.state.currentPage] || pages[0];
     const { backgroundColor } = currentPage;
@@ -61,6 +75,7 @@ export default class Onboarding extends Component {
                     subtitle={subtitle}
                     width={width}
                     height={height}
+                    orientation={this.state.orientation}
                 />
             ))}
           </ScrollView>

@@ -15,18 +15,24 @@ const PageContent = ({ children }) => (
   </View>
 );
 
-const PageData = ({ isLight, image, title, subtitle, ...rest }) => (
+const PageData = ({ isLight, image, title, subtitle, width, orientation, ...rest }) => (
   <Page {...rest}>
     <PageContent>
-      <View style={styles.image}>
-        {image}
+      <View style={orientation == VERTICAL_ORIENTATION ? styles.verticalContent : styles.horizontalContent}>
+        <View style={{maxWidth: orientation == VERTICAL_ORIENTATION ? width : width/2}}>
+          <View style={orientation == VERTICAL_ORIENTATION ? styles.verticalImage : styles.horizontalImage}>
+              {image}
+          </View>
+        </View>
+        <View style={{maxWidth: orientation == VERTICAL_ORIENTATION ? width : width/2}}>
+          <Text style={{ ...styles.title, ...(isLight ? styles.titleLight : {}) }}>
+              {title}
+          </Text>
+          <Text style={{ ...styles.subtitle, ...(isLight ? styles.subtitleLight : {}) }}>
+              {subtitle}
+          </Text>
+        </View>
       </View>
-      <Text style={{ ...styles.title, ...(isLight ? styles.titleLight : {}) }}>
-        {title}
-      </Text>
-      <Text style={{ ...styles.subtitle, ...(isLight ? styles.subtitleLight : {}) }}>
-        {subtitle}
-      </Text>
     </PageContent>
   </Page>
 );
@@ -39,9 +45,19 @@ const styles = {
     justifyContent: 'flex-start',
     paddingTop:60
   },
-  image: {
+  verticalContent :{
+    flexDirection: 'column',
+  },
+  horizontalContent:{
+    flexDirection: 'row',
+  },
+  verticalImage: {
     flex: 0,
     paddingBottom: 60,
+    alignItems: 'center',
+  },
+  horizontalImage: {
+    flex: 0,
     alignItems: 'center',
   },
   title: {
