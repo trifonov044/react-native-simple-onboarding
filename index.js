@@ -34,7 +34,7 @@ export default class Onboarding extends Component {
   };
 
   goNext = () => {
-    const { width } = this.state.width;
+    const { width } = this.state;
     const { currentPage } = this.state;
     const nextPage = currentPage + 1;
     const offsetX = nextPage * width;
