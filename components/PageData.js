@@ -56,7 +56,7 @@ const styles = {
   },
   verticalImage: {
     flex: 0,
-    paddingBottom: 60,
+    paddingBottom: 40,
     alignItems: 'center',
   },
   horizontalImage: {
@@ -65,7 +65,7 @@ const styles = {
   },
   title: {
     textAlign: 'center',
-    fontSize: 26,
+    fontSize: 24,
     color: '#fff',
     paddingBottom: 15,
   },
@@ -75,7 +75,7 @@ const styles = {
   subtitle: {
     padding:8,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 15,
     color: 'rgba(255, 255, 255, 1.0)',
   },
   subtitleLight: {
