@@ -64,6 +64,7 @@ const styles = {
     alignItems: 'center',
   },
   title: {
+    padding:16,
     textAlign: 'center',
     fontSize: 24,
     color: '#fff',
@@ -73,7 +74,7 @@ const styles = {
     color: '#000',
   },
   subtitle: {
-    padding:8,
+    padding:16,
     textAlign: 'center',
     fontSize: 15,
     color: 'rgba(255, 255, 255, 1.0)',
