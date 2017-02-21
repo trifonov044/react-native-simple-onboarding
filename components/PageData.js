@@ -10,8 +10,8 @@ const Page = ({ width, height, children }) => (
   </View>
 );
 
-const PageContent = ({ children }) => (
-  <View style={styles.content}>
+const PageContent = ({width, children }) => (
+  <View style={[styles.content, {width:width}]}>
     <View style={{ flex: 0 }}>
       {children}
     </View>
@@ -20,7 +20,7 @@ const PageContent = ({ children }) => (
 
 const PageData = ({ isLight, image, title, subtitle, width, orientation, ...rest }) => (
   <Page {...rest}>
-    <PageContent>
+    <PageContent width={width}>
       <View style={orientation == VERTICAL_ORIENTATION ? styles.verticalContent : styles.horizontalContent}>
         <View style={{maxWidth: orientation == VERTICAL_ORIENTATION ? width : width/2}}>
           <View style={orientation == VERTICAL_ORIENTATION ? styles.verticalImage : styles.horizontalImage}>
