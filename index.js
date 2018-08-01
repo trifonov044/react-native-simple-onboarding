@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { View, ScrollView, Dimensions, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import tinycolor from 'tinycolor2';
 
 import PageData from './components/PageData';
